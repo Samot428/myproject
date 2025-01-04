@@ -1,0 +1,11 @@
+Django==4.2.17  # Replace with your version
+gunicorn
+Pillow
+psycopg2-binary  # For PostgreSQL
+mysqlclient  # Only if using MySQL
+djangorestframework  # If using Django REST Framework
+django-environ  # For environment variable management
+celery  # For background tasks
+redis  # If using Celery with Redis
+boto3  # If using AWS S3 for static/media files
+django-storages  # If managing static/media files on S3
