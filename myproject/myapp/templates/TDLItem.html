@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+{% block aditional_nav_items %}
+        <li class="nav-item active">
+            <a class="nav-link" href="/app/ToDoList/">ToDoList /</a>
+        </li>
+        <li class="nav-item nav-item-left" >
+            <a class="nav-link disabled disabled-nav-link">{{ls.name}}</a>
+        </li>
+        {% endblock %}
+{% block content %}
+<html lang="en">
+    <body>
+        <div class="jumbotron">
+            <h1 name="{{ls.name}}" style="text-decoration: underline; text-align: center;">{{ls.name}}</h1>
+            {% if ls.item_set.all %}
+            <form method="post" action="#">    
+                {% csrf_token %}    
+                {% for item in ls.item_set.all %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                {% if item.completed == True%}
+                                    <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
+                                {% else %}
+                                    <input type="checkbox", value="clicked", name="c{{item.id}}">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input type="text" value="{{item.text}}" class="form-control" name="new-item{{item.id}}-text">
+                    </div>
+                {% endfor %}
+                <hr class="my-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="submit" , name="newItem", value="newItem", class="btn btn-success" 
+                        data-toggle="tooltip" data-placement="top" data-html="true" 
+                        title="Enter at least 3 letters long item">Add Item</button>
+                    </div>
+                    <input type="text", name="new">
+                </div>
+                <button type="submit" , name="save", value="save", class="btn btn-success">Save</button>
+                <button type="submit" class="btn btn-danger" name="Delete" value="Delete">Delete</button>
+            </form>
+            {% else %}
+            <form method="post" action="#">
+                {% csrf_token %}
+                <h4 style="text-align: center;">(You haven't created any items till now.)</h4>
+                <hr class="my-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button type="submit" , name="newItem", value="newItem", class="btn btn-success" 
+                        data-toggle="tooltip" data-placement="top" data-html="true" 
+                        title="Enter at least 3 letters long item">Add Item</button>
+                    </div>
+                    <input type="text", name="new">
+                </div>
+            </form>
+            {% endif %}
+        </div>
+    </body>
+</html>
+{% endblock %}
