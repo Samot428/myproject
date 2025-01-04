@@ -1,0 +1,11 @@
+Django==4.2.17  
+gunicorn
+Pillow
+psycopg2-binary  
+mysqlclient  
+djangorestframework  
+django-environ   
+celery 
+redis 
+boto3  
+django-storages 
